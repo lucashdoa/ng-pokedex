@@ -31,7 +31,7 @@ export class PokemonListComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.http.get<{count: number, next: string, previous: any, results: {name:string, url: string}[]}>('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151').subscribe(response => {
+    this.http.get<{count: number, next: string, previous: any, results: {name:string, url: string}[]}>('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=300').subscribe(response => {
       this.pokemonList = response.results
     })
   }
