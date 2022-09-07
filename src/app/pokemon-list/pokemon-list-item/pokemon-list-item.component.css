@@ -1,0 +1,16 @@
+#pokemon-img{
+  height: 200px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+#pokemon-name{
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+#pokemon-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
