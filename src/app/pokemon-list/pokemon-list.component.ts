@@ -3,18 +3,23 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http'
 
+import { PokemonList } from './pokemon-list.model';
+import { PokemonListItem } from './pokemon-list-item/pokemon-list-item.model';
+import { PokemonListService } from './pokemon-list.service';
+
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
 export class PokemonListComponent implements OnInit {
-  pokemonList: {name:string, url: string}[] = [];
+  pokemonList: PokemonListItem[] = [];
 
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private http: HttpClient
+    private http: HttpClient,
+    private pokemonListService: PokemonListService
   ) {
     this.matIconRegistry.addSvgIcon(
       'bug',
@@ -31,7 +36,7 @@ export class PokemonListComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.http.get<{count: number, next: string, previous: any, results: {name:string, url: string}[]}>('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=300').subscribe(response => {
+    this.pokemonListService.fetchPokemonList().subscribe(response => {
       this.pokemonList = response.results
     })
   }
